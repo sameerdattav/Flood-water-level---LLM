@@ -107,8 +107,19 @@ def execute_query(structured_query):
 # Main loop to take user queries and process them
 if __name__ == "__main__":
     print("Welcome! Ask me anything about the water levels on different roads.")
-    print("Available roads are:", ", ".join([col for col in df.columns if col.startswith('Road_')]))
-    print("Available timestamps are:", ", ".join(df['Timestamp'].dt.strftime('%Y-%m-%d %H:%M:%S').tolist()))
+    print("You can ask questions like:")
+    print("- What is the highest water level on road 101?")
+    print("- What was the water level on road 102 at 2024-10-15 08:00:00?")
+    print("- What are all the water levels on road 103?")
+    # print("Available roads are:", ", ".join([col for col in df.columns if col.startswith('Road_')]))
+    # print("Available timestamps are:", ", ".join(df['Timestamp'].dt.strftime('%Y-%m-%d %H:%M:%S').tolist()))
+    road_columns = [col for col in df.columns if col.startswith('Road_')]
+    print("Available roads range from:", road_columns[0], "to", road_columns[-1])
+
+# Displaying only the start and end of the timestamps
+    print("Available timestamps range from:", df['Timestamp'].min().strftime('%Y-%m-%d %H:%M:%S'), 
+      "to", df['Timestamp'].max().strftime('%Y-%m-%d %H:%M:%S'))
+
     print("Type 'exit' to stop.")
     
     while True:
